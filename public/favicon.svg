@@ -1,0 +1,29 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 100 100" width="100%" height="100%">
+  <rect width="100" height="100" rx="20" fill="#000000" />
+  
+  <!-- YELWIN 4-Way Starburst Compass Emblem -->
+  <g fill="#FFFFFF">
+    <!-- Top Module -->
+    <g>
+      <!-- Top-Right Wing -->
+      <path d="M 52.5 47.5 L 52.5 18 L 58.5 18 L 58.5 28 L 76 14.5 L 80 19 L 58.5 35.5 L 58.5 47.5 Z" />
+      <!-- Top-Left Wing -->
+      <path d="M 47.5 47.5 L 47.5 18 L 41.5 18 L 41.5 28 L 24 14.5 L 20 19 L 41.5 35.5 L 41.5 47.5 Z" />
+    </g>
+    <!-- Right Module -->
+    <g transform="rotate(90 50 50)">
+      <path d="M 52.5 47.5 L 52.5 18 L 58.5 18 L 58.5 28 L 76 14.5 L 80 19 L 58.5 35.5 L 58.5 47.5 Z" />
+      <path d="M 47.5 47.5 L 47.5 18 L 41.5 18 L 41.5 28 L 24 14.5 L 20 19 L 41.5 35.5 L 41.5 47.5 Z" />
+    </g>
+    <!-- Bottom Module -->
+    <g transform="rotate(180 50 50)">
+      <path d="M 52.5 47.5 L 52.5 18 L 58.5 18 L 58.5 28 L 76 14.5 L 80 19 L 58.5 35.5 L 58.5 47.5 Z" />
+      <path d="M 47.5 47.5 L 47.5 18 L 41.5 18 L 41.5 28 L 24 14.5 L 20 19 L 41.5 35.5 L 41.5 47.5 Z" />
+    </g>
+    <!-- Left Module -->
+    <g transform="rotate(270 50 50)">
+      <path d="M 52.5 47.5 L 52.5 18 L 58.5 18 L 58.5 28 L 76 14.5 L 80 19 L 58.5 35.5 L 58.5 47.5 Z" />
+      <path d="M 47.5 47.5 L 47.5 18 L 41.5 18 L 41.5 28 L 24 14.5 L 20 19 L 41.5 35.5 L 41.5 47.5 Z" />
+    </g>
+  </g>
+</svg>
