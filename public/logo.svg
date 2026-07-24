@@ -1,0 +1,60 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 500 500" width="100%" height="100%">
+  <rect width="500" height="500" fill="#000000" />
+  
+  <!-- YELWIN Arch + Ring Sculpture Emblem -->
+  <g fill="#FFFFFF" transform="translate(100, 20) scale(3)">
+    <!-- Circle Ring -->
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M 50 15 C 58.28 15 65 21.72 65 30 C 65 38.28 58.28 45 50 45 C 41.72 45 35 38.28 35 30 C 35 21.72 41.72 15 50 15 Z M 50 20 C 55.52 20 60 24.48 60 30 C 60 35.52 55.52 40 50 40 C 44.48 40 40 35.52 40 30 C 40 24.48 44.48 20 50 20 Z"
+    />
+    <!-- Outer Arch -->
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M 27 88 C 27 63 37 51 50 51 C 63 51 73 63 73 88 C 69 82 61 58 50 58 C 39 58 31 82 27 88 Z"
+    />
+    <!-- Inner Arch -->
+    <path
+      fill-rule="evenodd"
+      clip-rule="evenodd"
+      d="M 34 84 C 34 71 41 66 50 66 C 59 66 66 71 66 84 C 63 80 57 72 50 72 C 43 72 37 80 34 84 Z"
+    />
+  </g>
+
+  <!-- Wordmark Y E L W I N -->
+  <g fill="#FFFFFF" transform="translate(0, 70)">
+    <!-- Y -->
+    <path d="M 70 290 L 96 332 L 96 358 L 110 358 L 110 332 L 136 290 L 120 290 L 103 320 L 86 290 Z" />
+    
+    <!-- E (Three stylized horizontal bars) -->
+    <rect x="155" y="292" width="50" height="12" rx="1" />
+    <rect x="155" y="318" width="50" height="12" rx="1" />
+    <rect x="155" y="344" width="50" height="12" rx="1" />
+    
+    <!-- L -->
+    <path d="M 228 290 L 228 358 L 274 358 L 274 344 L 243 344 L 243 290 Z" />
+    
+    <!-- W -->
+    <path d="M 295 290 L 309 358 L 322 358 L 333 312 L 344 358 L 357 358 L 371 290 L 355 290 L 349 336 L 337 290 L 328 290 L 316 336 L 310 290 Z" />
+    
+    <!-- I -->
+    <rect x="390" y="290" width="14" height="68" />
+    
+    <!-- N -->
+    <path d="M 422 290 L 422 358 L 436 358 L 458 314 L 458 358 L 472 358 L 472 290 L 458 290 L 436 334 L 436 290 Z" />
+  </g>
+
+  <!-- Tagline Flanked by Accent Lines: — BE BEYOND. — -->
+  <g fill="#FFFFFF" stroke="#FFFFFF">
+    <!-- Left Accent Line -->
+    <line x1="60" y1="462" x2="160" y2="462" stroke-width="1.5" opacity="0.8" />
+    
+    <!-- Tagline Text -->
+    <text x="250" y="466" font-family="monospace" font-size="14" font-weight="bold" letter-spacing="8" text-anchor="middle" fill="#FFFFFF" stroke="none">BE BEYOND.</text>
+    
+    <!-- Right Accent Line -->
+    <line x1="340" y1="462" x2="440" y2="462" stroke-width="1.5" opacity="0.8" />
+  </g>
+</svg>
