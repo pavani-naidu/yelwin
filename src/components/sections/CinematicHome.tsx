@@ -26,6 +26,8 @@ export const CinematicHome: React.FC<CinematicHomeProps> = ({ onTalkClick }) => 
   });
 
   // Map scroll values to overlay opacities
+  // Canvas opacity mapping: hidden at scroll 0, fades in as they scroll
+  const canvasOpacity = useTransform(scrollYProgress, [0.0, 0.04], [0, 1]);
   // 1. Hero Overlay: Visible in [0.0, 0.16]
   const heroOpacity = useTransform(scrollYProgress, [0.0, 0.12, 0.16], [1, 1, 0]);
   const heroY = useTransform(scrollYProgress, [0.0, 0.16], [0, -30]);
@@ -109,10 +111,13 @@ export const CinematicHome: React.FC<CinematicHomeProps> = ({ onTalkClick }) => 
       {/* 500vh Immersive Cinematic Timeline */}
       <div ref={containerRef} className="relative h-[480vh] w-full">
         {/* Full-screen Sticky WebGL Canvas Container */}
-        <div className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0">
+        <motion.div
+          style={{ opacity: canvasOpacity }}
+          className="sticky top-0 left-0 w-full h-screen overflow-hidden z-0"
+        >
           <CinematicJourney3D scrollProgress={currentProgress} className="absolute inset-0 w-full h-full" />
           <div className="absolute inset-0 bg-gradient-to-b from-black/20 via-transparent to-black/35 pointer-events-none" />
-        </div>
+        </motion.div>
 
         {/* Cinematic Content Overlays */}
         <div className="absolute inset-0 z-10 pointer-events-none">

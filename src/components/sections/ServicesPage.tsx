@@ -22,6 +22,29 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onTalkClick }) => {
   const services = [
     {
       number: '01',
+      icon: PenTool,
+      title: 'UI/UX & PRODUCT DESIGN',
+      desc: 'User-centered design that combines creativity, usability and functionality to craft memorable experiences.',
+      graphic: (
+        // Interactive mockup wireframe card + text + cursor
+        <svg viewBox="0 0 200 100" fill="none" className="w-full h-full opacity-40 group-hover:opacity-80 transition-opacity duration-500">
+          <rect x="50" y="15" width="100" height="70" rx="4" fill="#0c0c0c" stroke="#444" strokeWidth="0.5" />
+          {/* Mockup UI items */}
+          <circle cx="65" cy="30" r="6" fill="#222" stroke="#666" strokeWidth="0.5" />
+          <line x1="80" y1="27" x2="135" y2="27" stroke="#fff" strokeWidth="0.8" />
+          <line x1="80" y1="33" x2="115" y2="33" stroke="#555" strokeWidth="0.5" />
+          {/* Floating 'Aa' card */}
+          <rect x="110" y="40" width="35" height="35" rx="3" fill="#181818" stroke="#888" strokeWidth="0.5" />
+          <text x="127" y="63" fontFamily="monospace" fontSize="16" fontWeight="bold" textAnchor="middle" fill="#fff">Aa</text>
+          {/* Custom vector node */}
+          <path d="M 60 70 L 95 50" stroke="#fff" strokeWidth="0.8" strokeDasharray="2 2" />
+          <rect x="57" y="67" width="6" height="6" fill="#fff" />
+          <circle cx="95" cy="50" r="3" fill="#fff" />
+        </svg>
+      )
+    },
+    {
+      number: '02',
       icon: Code,
       title: 'WEB DEVELOPMENT',
       desc: 'Fast, secure and scalable websites and web applications built with clean code and best practices.',
@@ -36,7 +59,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onTalkClick }) => {
       )
     },
     {
-      number: '02',
+      number: '03',
       icon: Bot,
       title: 'AI AUTOMATION',
       desc: 'Intelligent automation that simplifies workflows, reduces manual tasks and helps your business move faster.',
@@ -56,7 +79,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onTalkClick }) => {
       )
     },
     {
-      number: '03',
+      number: '04',
       icon: Box,
       title: 'SAAS DEVELOPMENT',
       desc: 'Scalable SaaS platforms designed for performance, reliability and long-term business growth.',
@@ -75,7 +98,7 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onTalkClick }) => {
       )
     },
     {
-      number: '04',
+      number: '05',
       icon: Smartphone,
       title: 'MOBILE APP DEVELOPMENT',
       desc: 'Native and cross-platform mobile apps that deliver smooth, engaging and high-performance experiences.',
@@ -91,29 +114,6 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onTalkClick }) => {
           {/* Floating rings */}
           <ellipse cx="100" cy="50" rx="36" ry="12" stroke="#666" strokeWidth="0.5" strokeDasharray="2 4" />
           <ellipse cx="102" cy="54" rx="42" ry="14" stroke="#333" strokeWidth="0.5" />
-        </svg>
-      )
-    },
-    {
-      number: '05',
-      icon: PenTool,
-      title: 'UI/UX & PRODUCT DESIGN',
-      desc: 'User-centered design that combines creativity, usability and functionality to craft memorable experiences.',
-      graphic: (
-        // Interactive mockup wireframe card + text + cursor
-        <svg viewBox="0 0 200 100" fill="none" className="w-full h-full opacity-40 group-hover:opacity-80 transition-opacity duration-500">
-          <rect x="50" y="15" width="100" height="70" rx="4" fill="#0c0c0c" stroke="#444" strokeWidth="0.5" />
-          {/* Mockup UI items */}
-          <circle cx="65" cy="30" r="6" fill="#222" stroke="#666" strokeWidth="0.5" />
-          <line x1="80" y1="27" x2="135" y2="27" stroke="#fff" strokeWidth="0.8" />
-          <line x1="80" y1="33" x2="115" y2="33" stroke="#555" strokeWidth="0.5" />
-          {/* Floating 'Aa' card */}
-          <rect x="110" y="40" width="35" height="35" rx="3" fill="#181818" stroke="#888" strokeWidth="0.5" />
-          <text x="127" y="63" fontFamily="monospace" fontSize="16" fontWeight="bold" textAnchor="middle" fill="#fff">Aa</text>
-          {/* Custom vector node */}
-          <path d="M 60 70 L 95 50" stroke="#fff" strokeWidth="0.8" strokeDasharray="2 2" />
-          <rect x="57" y="67" width="6" height="6" fill="#fff" />
-          <circle cx="95" cy="50" r="3" fill="#fff" />
         </svg>
       )
     },
