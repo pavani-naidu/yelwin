@@ -42,3 +42,13 @@
 ::-webkit-scrollbar-thumb:hover {
   background: #666666;
 }
+
+/* Force standard arrow cursor across all interactive elements */
+*, html, body, a, button, select, [role="button"], .cursor-pointer {
+  cursor: default !important;
+}
+
+/* Preserve text input caret cursor for form readability */
+input[type="text"], input[type="email"], input[type="number"], textarea, [contenteditable="true"] {
+  cursor: text !important;
+}
