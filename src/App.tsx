@@ -5,21 +5,8 @@ import { ScrollProgressBar } from './components/common/ScrollProgressBar';
 import { Footer } from './components/common/Footer';
 import { CookieConsent } from './components/common/CookieConsent';
 import { Modal } from './components/common/Modal';
-import { HeroSection } from './components/sections/HeroSection';
-import { TrustSection } from './components/sections/TrustSection';
-import { ServicesSection } from './components/sections/ServicesSection';
 import { ServicesPage } from './components/sections/ServicesPage';
-import { WorkSection } from './components/sections/WorkSection';
-import { WhyYelwinSection } from './components/sections/WhyYelwinSection';
-import { HowWeWorkSection } from './components/sections/HowWeWorkSection';
-import { AiSection } from './components/sections/AiSection';
-import { TechStackSection } from './components/sections/TechStackSection';
-import { MetricsSection } from './components/sections/MetricsSection';
-import { TestimonialsSection } from './components/sections/TestimonialsSection';
-import { AboutSection } from './components/sections/AboutSection';
-import { InsightsSection } from './components/sections/InsightsSection';
-import { FinalCtaSection } from './components/sections/FinalCtaSection';
-import { ProjectEnquirySection } from './components/sections/ProjectEnquirySection';
+import { CinematicHome } from './components/sections/CinematicHome';
 import { LegalPages } from './components/legal/LegalPages';
 import { updateSEOMetadata } from './utils/seo';
 import { analytics } from './utils/analytics';
@@ -116,61 +103,7 @@ export default function App() {
             {currentPage === 'services' ? (
               <ServicesPage onTalkClick={() => scrollToContact()} />
             ) : (
-              <>
-                {/* 01: Hero */}
-                <HeroSection
-                  onStartProjectClick={() => scrollToContact()}
-                  onExploreWorkClick={() => scrollToWork()}
-                />
-
-                {/* 02: Trust / Positioning */}
-                <TrustSection />
-
-                {/* 03: What We Do / Services */}
-                <ServicesSection
-                  onStartProjectForService={(title) => scrollToContact(title)}
-                />
-
-                {/* 04: Selected Work / Case Studies */}
-                <WorkSection />
-
-                {/* 05: Why YELWIN */}
-                <WhyYelwinSection />
-
-                {/* 06: How We Work */}
-                <HowWeWorkSection />
-
-                {/* 07: AI Section */}
-                <AiSection
-                  onExploreAiClick={() => scrollToContact('AI Solution')}
-                />
-
-                {/* 08: Technology Stack */}
-                <TechStackSection />
-
-                {/* 09: Results & Impact */}
-                <MetricsSection />
-
-                {/* 10: Testimonials */}
-                <TestimonialsSection />
-
-                {/* 11: About YELWIN */}
-                <AboutSection />
-
-                {/* 12: Insights / Blog */}
-                <InsightsSection />
-
-                {/* 13: Final CTA */}
-                <FinalCtaSection
-                  onStartProjectClick={() => scrollToContact()}
-                  onTalkToUsClick={() => scrollToContact()}
-                />
-
-                {/* 14: Project Enquiry Form */}
-                <ProjectEnquirySection
-                  initialServiceSelection={selectedServiceForProject}
-                />
-              </>
+              <CinematicHome onTalkClick={() => scrollToContact()} />
             )}
           </main>
 
