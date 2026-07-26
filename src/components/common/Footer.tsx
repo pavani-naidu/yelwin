@@ -39,7 +39,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigate }) => {
               Navigation
             </h4>
             <ul className="flex flex-col gap-3 font-mono text-sm">
-              {['work', 'services', 'about', 'insights', 'contact'].map((id) => (
+              {['hero', 'services', 'about', 'insights', 'contact'].map((id) => (
                 <li key={id}>
                   <button
                     onClick={() => {
@@ -48,7 +48,7 @@ export const Footer: React.FC<FooterProps> = ({ onOpenLegal, onNavigate }) => {
                     }}
                     className="text-neutral-300 hover:text-white uppercase transition-colors"
                   >
-                    {id}
+                    {id === 'hero' ? 'home' : id}
                   </button>
                 </li>
               ))}
