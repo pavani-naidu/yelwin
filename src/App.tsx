@@ -8,6 +8,7 @@ import { Modal } from './components/common/Modal';
 import { HeroSection } from './components/sections/HeroSection';
 import { TrustSection } from './components/sections/TrustSection';
 import { ServicesSection } from './components/sections/ServicesSection';
+import { ServicesPage } from './components/sections/ServicesPage';
 import { WorkSection } from './components/sections/WorkSection';
 import { WhyYelwinSection } from './components/sections/WhyYelwinSection';
 import { HowWeWorkSection } from './components/sections/HowWeWorkSection';
@@ -28,6 +29,7 @@ export default function App() {
   const [activeLegalModal, setActiveLegalModal] = useState<'privacy' | 'terms' | 'cookie' | null>(null);
   const [showCareersModal, setShowCareersModal] = useState<boolean>(false);
   const [selectedServiceForProject, setSelectedServiceForProject] = useState<string>('Web Application');
+  const [currentPage, setCurrentPage] = useState<'home' | 'services'>('home');
 
   useEffect(() => {
     // Initialize SEO Metadata
@@ -44,6 +46,20 @@ export default function App() {
   const handleRevealComplete = () => {
     sessionStorage.setItem('yelwin_logo_reveal_seen', 'true');
     setShowLogoReveal(false);
+  };
+
+  const handlePageNavigation = (page: 'home' | 'services', targetSectionId?: string) => {
+    setCurrentPage(page);
+    setTimeout(() => {
+      if (targetSectionId) {
+        const element = document.getElementById(targetSectionId);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+          return;
+        }
+      }
+      window.scrollTo({ top: 0, behavior: 'smooth' });
+    }, 100);
   };
 
   const scrollToContact = (serviceTitle?: string) => {
@@ -65,24 +81,15 @@ export default function App() {
       }
       setSelectedServiceForProject(mappedService);
     }
-    const element = document.getElementById('contact');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    handlePageNavigation('home', 'contact');
   };
 
   const scrollToWork = () => {
-    const element = document.getElementById('work');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    handlePageNavigation('home', 'work');
   };
 
   const scrollToSection = (id: string) => {
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    handlePageNavigation('home', id);
   };
 
   return (
@@ -100,69 +107,83 @@ export default function App() {
           <Navbar
             onStartProjectClick={() => scrollToContact()}
             onCareersClick={() => setShowCareersModal(true)}
+            currentPage={currentPage}
+            onNavigate={(page, id) => handlePageNavigation(page, id)}
           />
 
           {/* Main Sections */}
           <main>
-            {/* 01: Hero */}
-            <HeroSection
-              onStartProjectClick={() => scrollToContact()}
-              onExploreWorkClick={() => scrollToWork()}
-            />
+            {currentPage === 'services' ? (
+              <ServicesPage onTalkClick={() => scrollToContact()} />
+            ) : (
+              <>
+                {/* 01: Hero */}
+                <HeroSection
+                  onStartProjectClick={() => scrollToContact()}
+                  onExploreWorkClick={() => scrollToWork()}
+                />
 
-            {/* 02: Trust / Positioning */}
-            <TrustSection />
+                {/* 02: Trust / Positioning */}
+                <TrustSection />
 
-            {/* 03: What We Do / Services */}
-            <ServicesSection
-              onStartProjectForService={(title) => scrollToContact(title)}
-            />
+                {/* 03: What We Do / Services */}
+                <ServicesSection
+                  onStartProjectForService={(title) => scrollToContact(title)}
+                />
 
-            {/* 04: Selected Work / Case Studies */}
-            <WorkSection />
+                {/* 04: Selected Work / Case Studies */}
+                <WorkSection />
 
-            {/* 05: Why YELWIN */}
-            <WhyYelwinSection />
+                {/* 05: Why YELWIN */}
+                <WhyYelwinSection />
 
-            {/* 06: How We Work */}
-            <HowWeWorkSection />
+                {/* 06: How We Work */}
+                <HowWeWorkSection />
 
-            {/* 07: AI Section */}
-            <AiSection
-              onExploreAiClick={() => scrollToContact('AI Solution')}
-            />
+                {/* 07: AI Section */}
+                <AiSection
+                  onExploreAiClick={() => scrollToContact('AI Solution')}
+                />
 
-            {/* 08: Technology Stack */}
-            <TechStackSection />
+                {/* 08: Technology Stack */}
+                <TechStackSection />
 
-            {/* 09: Results & Impact */}
-            <MetricsSection />
+                {/* 09: Results & Impact */}
+                <MetricsSection />
 
-            {/* 10: Testimonials */}
-            <TestimonialsSection />
+                {/* 10: Testimonials */}
+                <TestimonialsSection />
 
-            {/* 11: About YELWIN */}
-            <AboutSection />
+                {/* 11: About YELWIN */}
+                <AboutSection />
 
-            {/* 12: Insights / Blog */}
-            <InsightsSection />
+                {/* 12: Insights / Blog */}
+                <InsightsSection />
 
-            {/* 13: Final CTA */}
-            <FinalCtaSection
-              onStartProjectClick={() => scrollToContact()}
-              onTalkToUsClick={() => scrollToContact()}
-            />
+                {/* 13: Final CTA */}
+                <FinalCtaSection
+                  onStartProjectClick={() => scrollToContact()}
+                  onTalkToUsClick={() => scrollToContact()}
+                />
 
-            {/* 14: Project Enquiry Form */}
-            <ProjectEnquirySection
-              initialServiceSelection={selectedServiceForProject}
-            />
+                {/* 14: Project Enquiry Form */}
+                <ProjectEnquirySection
+                  initialServiceSelection={selectedServiceForProject}
+                />
+              </>
+            )}
           </main>
 
           {/* Footer */}
           <Footer
             onOpenLegal={(policy) => setActiveLegalModal(policy)}
-            onNavigate={(id) => scrollToSection(id)}
+            onNavigate={(id) => {
+              if (id === 'services') {
+                handlePageNavigation('services');
+              } else {
+                handlePageNavigation('home', id);
+              }
+            }}
           />
 
           {/* Cookie Consent Banner */}

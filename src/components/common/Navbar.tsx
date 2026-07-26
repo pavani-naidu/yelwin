@@ -7,12 +7,16 @@ import { analytics } from '../../utils/analytics';
 interface NavbarProps {
   onStartProjectClick: () => void;
   onCareersClick: () => void;
+  currentPage: 'home' | 'services';
+  onNavigate: (page: 'home' | 'services', targetSectionId?: string) => void;
   activeSection?: string;
 }
 
 export const Navbar: React.FC<NavbarProps> = ({
   onStartProjectClick,
   onCareersClick,
+  currentPage,
+  onNavigate,
   activeSection = '',
 }) => {
   const [isScrolled, setIsScrolled] = useState(false);
@@ -38,10 +42,11 @@ export const Navbar: React.FC<NavbarProps> = ({
       onCareersClick();
       return;
     }
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
+    if (id === 'services') {
+      onNavigate('services');
+      return;
     }
+    onNavigate('home', id);
   };
 
   const navLinks = [
@@ -76,7 +81,8 @@ export const Navbar: React.FC<NavbarProps> = ({
         {/* Center: Desktop Navigation */}
         <nav className="hidden md:flex items-center gap-8">
           {navLinks.map((link) => {
-            const isActive = activeSection === link.id;
+            const isActive = (currentPage === 'services' && link.id === 'services') ||
+                             (currentPage === 'home' && activeSection === link.id);
             return (
               <button
                 key={link.id}
