@@ -3,7 +3,7 @@ import { motion, useScroll, useTransform, AnimatePresence } from 'motion/react';
 import { ArrowUpRight, ArrowRight, Layers, Cpu, Compass, Activity, ShieldCheck, Settings } from 'lucide-react';
 import { CinematicJourney3D } from '../3d/CinematicJourney3D';
 import { ProjectEnquirySection } from './ProjectEnquirySection';
-import { CASE_STUDIES_DATA, HOW_WE_WORK_STEPS } from '../../data/contentData';
+import { HOW_WE_WORK_STEPS } from '../../data/contentData';
 import { analytics } from '../../utils/analytics';
 
 interface CinematicHomeProps {
@@ -152,10 +152,10 @@ export const CinematicHome: React.FC<CinematicHomeProps> = ({ onTalkClick }) => 
                     <ArrowUpRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-0.5 group-hover:-translate-y-0.5" />
                   </button>
                   <button
-                    onClick={scrollToWork}
+                    onClick={scrollToWhatWeDo}
                     className="group inline-flex items-center justify-center gap-2 px-6 py-3 border border-neutral-800 bg-black/60 text-white font-mono font-bold text-xs tracking-widest uppercase rounded-full hover:border-neutral-500 transition-colors cursor-pointer"
                   >
-                    <span>VIEW OUR WORK</span>
+                    <span>EXPLORE SERVICES</span>
                     <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
                   </button>
                 </div>
@@ -360,98 +360,7 @@ export const CinematicHome: React.FC<CinematicHomeProps> = ({ onTalkClick }) => 
         </div>
       </section>
 
-      {/* 12. FEATURED WORK SECTION */}
-      <section id="portfolio" className="bg-black py-32 px-6 md:px-12 border-t border-neutral-900 relative z-20">
-        <div className="max-w-7xl mx-auto">
-          {/* Header */}
-          <div className="flex flex-col md:flex-row md:items-end justify-between gap-6 mb-20">
-            <div className="space-y-4">
-              <span className="text-xs font-mono font-bold tracking-[0.25em] text-neutral-500 uppercase">
-                SELECTED WORK
-              </span>
-              <h2 className="font-mono font-black text-4xl sm:text-6xl uppercase tracking-tight text-white leading-none">
-                IDEAS WE <br />
-                BROUGHT TO LIFE.
-              </h2>
-            </div>
 
-            <a
-              href="#contact"
-              onClick={(e) => {
-                e.preventDefault();
-                scrollToContact();
-              }}
-              className="group inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest uppercase text-white hover:text-neutral-300 transition-colors shrink-0"
-            >
-              <span>EXPLORE ALL WORK</span>
-              <ArrowUpRight className="w-4 h-4 transition-transform group-hover:translate-x-1 group-hover:-translate-y-1" />
-            </a>
-          </div>
-
-          {/* Large Visual Composition Cards (3 Projects) */}
-          <div className="space-y-24">
-            {CASE_STUDIES_DATA.slice(0, 3).map((project, idx) => {
-              const number = `PROJECT 0${idx + 1}`;
-              return (
-                <motion.div
-                  key={project.id}
-                  initial={{ opacity: 0, y: 40 }}
-                  whileInView={{ opacity: 1, y: 0 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
-                  className="group block overflow-hidden border-b border-neutral-900 pb-16 cursor-pointer"
-                  onClick={() => {
-                    analytics.track('Case Study Click', 'CaseStudy', project.title);
-                    scrollToContact();
-                  }}
-                >
-                  <div className="grid grid-cols-1 lg:grid-cols-12 gap-8 items-center">
-                    
-                    {/* Left: Metadata */}
-                    <div className="lg:col-span-4 flex flex-col justify-between h-full gap-8">
-                      <div className="space-y-4">
-                        <span className="font-mono text-xs tracking-widest text-neutral-600 block">
-                          {number} / {project.industry}
-                        </span>
-                        <h3 className="font-mono font-black text-2xl sm:text-3xl lg:text-4xl text-white uppercase group-hover:text-neutral-300 transition-colors duration-300">
-                          {project.title}
-                        </h3>
-                        <p className="text-neutral-400 font-sans text-xs sm:text-sm leading-relaxed max-w-xs">
-                          {project.description}
-                        </p>
-                      </div>
-
-                      <div className="flex">
-                        <div className="inline-flex items-center gap-2 text-xs font-mono font-bold tracking-widest uppercase border border-neutral-800 bg-neutral-950 px-5 py-2.5 rounded-full group-hover:border-white transition-colors">
-                          <span>VIEW DETAILS</span>
-                          <ArrowRight className="w-3.5 h-3.5 transition-transform group-hover:translate-x-1" />
-                        </div>
-                      </div>
-                    </div>
-
-                    {/* Right: Immersive Image Mockup Container */}
-                    <div className="lg:col-span-8 overflow-hidden rounded-xl bg-neutral-950 border border-neutral-900 relative aspect-[16/9]">
-                      {/* Image under strict grayscale filter */}
-                      <img
-                        src={project.imageUrl}
-                        alt={project.title}
-                        className="w-full h-full object-cover grayscale opacity-30 group-hover:opacity-60 group-hover:scale-[1.03] transition-all duration-700"
-                      />
-                      
-                      {/* Abstract overlay graphics */}
-                      <div className="absolute inset-0 bg-gradient-to-t from-black/90 via-black/10 to-transparent pointer-events-none" />
-                      <div className="absolute bottom-6 right-6 font-mono text-[9px] text-neutral-500 tracking-[0.2em] uppercase">
-                        YELWIN PLATFORM FRAMEWORK v2
-                      </div>
-                    </div>
-
-                  </div>
-                </motion.div>
-              );
-            })}
-          </div>
-        </div>
-      </section>
 
       {/* 13. PROCESS SECTION */}
       <section className="bg-black py-32 px-6 md:px-12 border-t border-neutral-900 relative z-20">
