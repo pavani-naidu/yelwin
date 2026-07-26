@@ -84,27 +84,27 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     };
 
     // --- Lighting ---
-    const ambientLight = new THREE.AmbientLight(0xffffff, 0.05);
+    const ambientLight = new THREE.AmbientLight(0xffffff, 0.08);
     scene.add(ambientLight);
 
     // Volumetric Spotlight behind portal
-    const portalLight = new THREE.SpotLight(0xffffff, 0, 30, Math.PI / 3, 0.8, 1);
-    portalLight.position.set(0, 1.2, -6);
+    const portalLight = new THREE.SpotLight(0xffffff, 0, 35, Math.PI / 3, 0.8, 1);
+    portalLight.position.set(0, 1.5, -6.5);
     portalLight.castShadow = true;
     portalLight.shadow.mapSize.width = 1024;
     portalLight.shadow.mapSize.height = 1024;
     scene.add(portalLight);
 
     // Backlight to silhouette character
-    const silhouetteLight = new THREE.DirectionalLight(0xffffff, 0.5);
-    silhouetteLight.position.set(0, 2, -10);
+    const silhouetteLight = new THREE.DirectionalLight(0xffffff, 0.65);
+    silhouetteLight.position.set(0, 2.5, -12);
     scene.add(silhouetteLight);
 
-    // --- Floor ---
-    const floorGeo = new THREE.PlaneGeometry(80, 80);
+    // --- Floor Grid ---
+    const floorGeo = new THREE.PlaneGeometry(100, 100);
     const floorMat = new THREE.MeshStandardMaterial({
-      color: 0x070707,
-      roughness: 0.12,
+      color: 0x050505,
+      roughness: 0.18,
       metalness: 0.95,
     });
     track(floorGeo, floorMat);
@@ -113,6 +113,11 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     floorMesh.position.y = -1.0;
     floorMesh.receiveShadow = true;
     scene.add(floorMesh);
+
+    // Grid helper overlay on floor for strict perspective lines
+    const gridHelper = new THREE.GridHelper(100, 60, 0x444444, 0x141414);
+    gridHelper.position.y = -0.99;
+    scene.add(gridHelper);
 
     // --- Human Silhouette (Programmatic Humanoid Outline) ---
     const charGroup = new THREE.Group();
@@ -148,18 +153,18 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     rightLeg.position.set(0.08, 0.35, 0);
     charGroup.add(rightLeg);
 
-    // Left Arm
+    // Left Arm (Dynamic Walking Pose)
     const armGeo = new THREE.CylinderGeometry(0.045, 0.035, 0.55, 16);
     track(armGeo, silhouetteMat);
     const leftArm = new THREE.Mesh(armGeo, silhouetteMat);
-    leftArm.position.set(-0.19, 0.95, 0);
-    leftArm.rotation.z = 0.05;
+    leftArm.position.set(-0.19, 0.95, 0.05);
+    leftArm.rotation.x = 0.2; // swing forward
     charGroup.add(leftArm);
 
-    // Right Arm
+    // Right Arm (Dynamic Walking Pose)
     const rightArm = new THREE.Mesh(armGeo, silhouetteMat);
-    rightArm.position.set(0.19, 0.95, 0);
-    rightArm.rotation.z = -0.05;
+    rightArm.position.set(0.19, 0.95, -0.05);
+    rightArm.rotation.x = -0.2; // swing backward
     charGroup.add(rightArm);
 
     // --- Monumental Portal Doorway ---
@@ -168,9 +173,9 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     scene.add(portalGroup);
 
     const metalMat = new THREE.MeshStandardMaterial({
-      color: 0x101010,
-      metalness: 0.9,
-      roughness: 0.25,
+      color: 0x0f0f0f,
+      metalness: 0.95,
+      roughness: 0.2,
     });
 
     // Left Door panel
@@ -206,8 +211,65 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     topFrame.position.set(0, 3.2, 0.05);
     portalGroup.add(topFrame);
 
+    // --- High-End Doorway Detail 1: Split circle lock ---
+    const lockMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    materials.push(lockMat);
+
+    const leftLockGeo = new THREE.RingGeometry(0.3, 0.34, 32, 1, Math.PI / 2, Math.PI);
+    track(leftLockGeo, lockMat);
+    const leftLock = new THREE.Mesh(leftLockGeo, lockMat);
+    leftLock.position.set(0.45, 1.1, 0.16); // Flush on front of leftDoor
+    leftDoor.add(leftLock);
+
+    const rightLockGeo = new THREE.RingGeometry(0.3, 0.34, 32, 1, -Math.PI / 2, Math.PI);
+    track(rightLockGeo, lockMat);
+    const rightLock = new THREE.Mesh(rightLockGeo, lockMat);
+    rightLock.position.set(-0.45, 1.1, 0.16); // Flush on front of rightDoor
+    rightDoor.add(rightLock);
+
+    // --- High-End Doorway Detail 2: Monolithic Horizontal Grooves ---
+    const grooveMat = new THREE.MeshStandardMaterial({
+      color: 0x050505,
+      metalness: 0.98,
+      roughness: 0.1,
+    });
+    materials.push(grooveMat);
+
+    const grooveGeo = new THREE.BoxGeometry(0.8, 0.04, 0.04);
+    track(grooveGeo, grooveMat);
+
+    for (let i = 0; i < 5; i++) {
+      const leftG = new THREE.Mesh(grooveGeo, grooveMat);
+      leftG.position.set(0, -0.6 + i * 0.5, 0.15);
+      leftDoor.add(leftG);
+
+      const rightG = new THREE.Mesh(grooveGeo, grooveMat);
+      rightG.position.set(0, -0.6 + i * 0.5, 0.15);
+      rightDoor.add(rightG);
+    }
+
+    // --- High-End Doorway Detail 3: Glowing Portal Frame Light Borders ---
+    const neonMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    materials.push(neonMat);
+
+    const neonLeftGeo = new THREE.BoxGeometry(0.03, 3.8, 0.02);
+    track(neonLeftGeo, neonMat);
+    const neonLeft = new THREE.Mesh(neonLeftGeo, neonMat);
+    neonLeft.position.set(-0.83, 1.1, 0.08);
+    portalGroup.add(neonLeft);
+
+    const neonRight = new THREE.Mesh(neonLeftGeo, neonMat);
+    neonRight.position.set(0.83, 1.1, 0.08);
+    portalGroup.add(neonRight);
+
+    const neonTopGeo = new THREE.BoxGeometry(1.69, 0.03, 0.02);
+    track(neonTopGeo, neonMat);
+    const neonTop = new THREE.Mesh(neonTopGeo, neonMat);
+    neonTop.position.set(0, 3.0, 0.08);
+    portalGroup.add(neonTop);
+
     // Bright glowing portal plane (revealed when door opens)
-    const glowPlaneGeo = new THREE.PlaneGeometry(1.6, 3.8);
+    const glowPlaneGeo = new THREE.PlaneGeometry(1.65, 3.8);
     const glowPlaneMat = new THREE.MeshBasicMaterial({
       color: 0xffffff,
       transparent: true,
@@ -219,9 +281,30 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     glowPlane.position.set(0, 1.1, -0.05);
     portalGroup.add(glowPlane);
 
+    // --- Volumetric Light Tunnel Rings behind portal ---
+    const tunnelGroup = new THREE.Group();
+    tunnelGroup.position.set(0, 1.1, -4.6);
+    scene.add(tunnelGroup);
+
+    const ringGlowMat = new THREE.MeshBasicMaterial({
+      color: 0xffffff,
+      transparent: true,
+      opacity: 0,
+      side: THREE.DoubleSide,
+    });
+    materials.push(ringGlowMat);
+
+    for (let i = 0; i < 12; i++) {
+      const ringGeo = new THREE.RingGeometry(0.82 + i * 0.18, 0.84 + i * 0.18, 32);
+      track(ringGeo, ringGlowMat);
+      const ringMesh = new THREE.Mesh(ringGeo, ringGlowMat);
+      ringMesh.position.z = -i * 0.95;
+      tunnelGroup.add(ringMesh);
+    }
+
     // --- Stage 1: Build (Floating Screens & Laptop Shape) ---
     const buildGroup = new THREE.Group();
-    buildGroup.position.set(0, 0, -11);
+    buildGroup.position.set(0, 0, -12);
     scene.add(buildGroup);
 
     const screenOutlineMat = new THREE.LineBasicMaterial({
@@ -232,16 +315,16 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     materials.push(screenOutlineMat);
 
     const screenFillMat = new THREE.MeshBasicMaterial({
-      color: 0x111111,
+      color: 0x0a0a0a,
       transparent: true,
       opacity: 0,
     });
     materials.push(screenFillMat);
 
     // Floating panels
-    for (let i = 0; i < 4; i++) {
-      const w = 1.6 + Math.random() * 0.8;
-      const h = 1.0 + Math.random() * 0.5;
+    for (let i = 0; i < 5; i++) {
+      const w = 1.8 + Math.random() * 0.8;
+      const h = 1.1 + Math.random() * 0.5;
       const planeGeo = new THREE.PlaneGeometry(w, h);
       const wireGeo = new THREE.EdgesGeometry(planeGeo);
       track(planeGeo, screenFillMat);
@@ -252,13 +335,13 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
       panel.add(wire);
 
       panel.position.set(
-        (Math.random() - 0.5) * 5.0,
-        (Math.random() - 0.3) * 2.5 + 0.5,
-        (Math.random() - 0.5) * 4.0
+        (Math.random() - 0.5) * 6.5,
+        (Math.random() - 0.3) * 2.8 + 0.5,
+        (Math.random() - 0.5) * 5.0
       );
       panel.rotation.set(
-        (Math.random() - 0.5) * 0.2,
-        (Math.random() - 0.5) * 0.4,
+        (Math.random() - 0.5) * 0.25,
+        (Math.random() - 0.5) * 0.45,
         0
       );
       buildGroup.add(panel);
@@ -493,6 +576,14 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
         rightDoor.position.x = 1.8;
         portalLight.intensity = 22;
         glowPlaneMat.opacity = 0.95;
+      }
+
+      // Animate volumetric light tunnel rings (0.08 to 0.35 progress)
+      if (progress >= 0.08 && progress < 0.35) {
+        const factor = Math.sin(((progress - 0.08) / 0.27) * Math.PI);
+        ringGlowMat.opacity = factor * 0.25;
+      } else {
+        ringGlowMat.opacity = 0;
       }
 
       // 3. Stage 1: Build floating screens opacity (0.12 to 0.45 progress)
