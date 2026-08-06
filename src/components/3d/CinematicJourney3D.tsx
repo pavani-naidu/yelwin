@@ -44,8 +44,8 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
 
     // --- Scene & Camera Setup ---
     const scene = new THREE.Scene();
-    scene.background = new THREE.Color(0x000000);
-    scene.fog = new THREE.FogExp2(0x000000, 0.045);
+    scene.background = new THREE.Color(0xffffff);
+    scene.fog = new THREE.FogExp2(0xffffff, 0.045);
 
     const camera = new THREE.PerspectiveCamera(
       45,
@@ -115,7 +115,7 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     scene.add(floorMesh);
 
     // Grid helper overlay on floor for strict perspective lines
-    const gridHelper = new THREE.GridHelper(100, 60, 0x444444, 0x141414);
+    const gridHelper = new THREE.GridHelper(100, 60, 0xcccccc, 0xeeeeee);
     gridHelper.position.y = -0.99;
     scene.add(gridHelper);
 
@@ -212,7 +212,7 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     portalGroup.add(topFrame);
 
     // --- High-End Doorway Detail 1: Split circle lock ---
-    const lockMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const lockMat = new THREE.MeshBasicMaterial({ color: 0x333333 });
     materials.push(lockMat);
 
     const leftLockGeo = new THREE.RingGeometry(0.3, 0.34, 32, 1, Math.PI / 2, Math.PI);
@@ -249,7 +249,7 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     }
 
     // --- High-End Doorway Detail 3: Glowing Portal Frame Light Borders ---
-    const neonMat = new THREE.MeshBasicMaterial({ color: 0xffffff });
+    const neonMat = new THREE.MeshBasicMaterial({ color: 0x333333 });
     materials.push(neonMat);
 
     const neonLeftGeo = new THREE.BoxGeometry(0.03, 3.8, 0.02);
@@ -308,7 +308,7 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     scene.add(buildGroup);
 
     const screenOutlineMat = new THREE.LineBasicMaterial({
-      color: 0xffffff,
+      color: 0x333333,
       transparent: true,
       opacity: 0,
     });
@@ -353,7 +353,7 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     scene.add(autoGroup);
 
     const nodeMat = new THREE.MeshBasicMaterial({
-      color: 0xffffff,
+      color: 0x333333,
       transparent: true,
       opacity: 0,
     });
@@ -403,7 +403,7 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     // Gyroscope ring
     const ringGeo = new THREE.TorusGeometry(1.0, 0.02, 16, 64);
     const ringMat = new THREE.MeshBasicMaterial({
-      color: 0xcccccc,
+      color: 0x888888,
       transparent: true,
       opacity: 0,
     });
@@ -427,7 +427,7 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
     materials.push(stepMat);
 
     const stepOutlineMat = new THREE.LineBasicMaterial({
-      color: 0xffffff,
+      color: 0x333333,
       transparent: true,
       opacity: 0,
     });
@@ -498,7 +498,7 @@ export const CinematicJourney3D: React.FC<CinematicJourney3DProps> = ({
 
     particlesGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
     const particleMat = new THREE.PointsMaterial({
-      color: 0xffffff,
+      color: 0x333333,
       size: 0.025,
       transparent: true,
       opacity: 0.45,

@@ -26,21 +26,21 @@
   }
 }
 
-/* Global Dark Theme Custom Scrollbar */
+/* Global Custom Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
 }
 
 ::-webkit-scrollbar-track {
-  background: #000000;
+  background: var(--bg-secondary) !important;
 }
 
 ::-webkit-scrollbar-thumb {
-  background: #333333;
+  background: var(--border-secondary) !important;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: #666666;
+  background: var(--text-quaternary) !important;
 }
 
 /* Force standard arrow cursor across all interactive elements */
@@ -52,3 +52,157 @@
 input[type="text"], input[type="email"], input[type="number"], textarea, [contenteditable="true"] {
   cursor: text !important;
 }
+
+/* --- Light Mode Core Variables --- */
+:root {
+  --bg-primary: #ffffff;
+  --bg-secondary: #f9f9fb;
+  --bg-tertiary: #f1f1f4;
+  --bg-darker: #e4e4e7;
+  
+  --text-primary: #000000;
+  --text-secondary: #27272a;
+  --text-tertiary: #52525b;
+  --text-quaternary: #71717a;
+  
+  --border-primary: #e4e4e7;
+  --border-secondary: #d4d4d8;
+}
+
+/* --- Map Tailwind Utility Classes to Light Mode --- */
+html, body {
+  background-color: var(--bg-primary) !important;
+  color: var(--text-primary) !important;
+}
+
+/* Background overrides */
+.bg-black {
+  background-color: var(--bg-primary) !important;
+}
+.bg-neutral-950 {
+  background-color: var(--bg-secondary) !important;
+}
+.bg-neutral-900 {
+  background-color: var(--bg-tertiary) !important;
+}
+.bg-neutral-800 {
+  background-color: var(--bg-darker) !important;
+}
+
+/* Translucent Background Overrides */
+.bg-black\/95 { background-color: rgba(255, 255, 255, 0.95) !important; }
+.bg-black\/90 { background-color: rgba(255, 255, 255, 0.90) !important; }
+.bg-black\/80 { background-color: rgba(255, 255, 255, 0.80) !important; }
+.bg-black\/75 { background-color: rgba(255, 255, 255, 0.75) !important; }
+.bg-black\/60 { background-color: rgba(255, 255, 255, 0.60) !important; }
+.bg-black\/50 { background-color: rgba(255, 255, 255, 0.50) !important; }
+.bg-black\/40 { background-color: rgba(255, 255, 255, 0.40) !important; }
+.bg-black\/30 { background-color: rgba(255, 255, 255, 0.30) !important; }
+.bg-black\/20 { background-color: rgba(255, 255, 255, 0.20) !important; }
+.bg-black\/10 { background-color: rgba(255, 255, 255, 0.10) !important; }
+
+/* Text overrides */
+.text-white {
+  color: var(--text-primary) !important;
+}
+.text-neutral-100 {
+  color: var(--text-primary) !important;
+}
+.text-neutral-200 {
+  color: var(--text-primary) !important;
+}
+.text-neutral-300 {
+  color: var(--text-secondary) !important;
+}
+.text-neutral-400 {
+  color: var(--text-tertiary) !important;
+}
+.text-neutral-500 {
+  color: var(--text-quaternary) !important;
+}
+
+/* Border overrides */
+.border-neutral-900 {
+  border-color: var(--border-secondary) !important;
+}
+.border-neutral-800 {
+  border-color: var(--border-primary) !important;
+}
+.border-white\/5 {
+  border-color: rgba(0, 0, 0, 0.05) !important;
+}
+.border-white\/10 {
+  border-color: rgba(0, 0, 0, 0.10) !important;
+}
+.border-white\/20 {
+  border-color: rgba(0, 0, 0, 0.18) !important;
+}
+.border-white\/30 {
+  border-color: rgba(0, 0, 0, 0.28) !important;
+}
+
+/* Logo Reveal Container custom glow */
+.logo-reveal-container .bg-white.blur-3xl {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+
+/* Scroll Progress Bar indicator */
+.ScrollProgressBar {
+  background-color: var(--text-primary) !important;
+}
+
+/* Invert default white fill and background components to black */
+.fill-white {
+  fill: var(--text-primary) !important;
+}
+.bg-white {
+  background-color: var(--text-primary) !important;
+}
+.text-black {
+  color: var(--bg-primary) !important;
+}
+.border-white {
+  border-color: var(--text-primary) !important;
+}
+
+/* Custom interactive selections or hover states */
+.hover\:bg-white\/10:hover {
+  background-color: rgba(0, 0, 0, 0.06) !important;
+}
+.hover\:border-neutral-500:hover {
+  border-color: var(--text-tertiary) !important;
+}
+.focus\:border-white:focus {
+  border-color: var(--text-primary) !important;
+}
+.focus\:ring-white:focus {
+  --tw-ring-color: var(--text-primary) !important;
+}
+.hover\:text-white:hover {
+  color: var(--text-primary) !important;
+}
+.group-hover\:text-white:hover {
+  color: var(--text-primary) !important;
+}
+.group-hover\:text-neutral-300:hover {
+  color: var(--text-secondary) !important;
+}
+.selection\:bg-white::selection {
+  background-color: var(--text-primary) !important;
+  color: var(--bg-primary) !important;
+}
+.selection\:text-black::selection {
+  color: var(--bg-primary) !important;
+}
+
+/* Text outline light mode adjustment */
+.text-outline {
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.8) !important;
+  color: transparent !important;
+}
+
+/* Invert standard linear gradients using pure black/white */
+.bg-gradient-to-b.from-black\/20 {
+  background-image: linear-gradient(to bottom, rgba(255, 255, 255, 0.20), transparent, rgba(255, 255, 255, 0.35)) !important;
+}
+

@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
 import { motion } from 'motion/react';
 import {
   Code,
@@ -13,12 +13,22 @@ import {
   ArrowRight
 } from 'lucide-react';
 import { analytics } from '../../utils/analytics';
+import { DefaultServicePage } from './DefaultServicePage';
+import { WebDevServicePage } from './WebDevServicePage';
+import { AiAutomationServicePage } from './AiAutomationServicePage';
+import { MarketingServicePage } from './MarketingServicePage';
 
 interface ServicesPageProps {
   onTalkClick: () => void;
 }
 
 export const ServicesPage: React.FC<ServicesPageProps> = ({ onTalkClick }) => {
+  const [selectedServiceId, setSelectedServiceId] = useState<string | null>(null);
+
+  useEffect(() => {
+    window.scrollTo({ top: 0, behavior: 'instant' });
+  }, [selectedServiceId]);
+
   const services = [
     {
       number: '01',
@@ -179,6 +189,45 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onTalkClick }) => {
     }
   ];
 
+  const selectedService = services.find((s) => s.number === selectedServiceId);
+
+  if (selectedServiceId && selectedService) {
+    if (selectedServiceId === '02') {
+      return (
+        <WebDevServicePage
+          onBackClick={() => setSelectedServiceId(null)}
+          onTalkClick={onTalkClick}
+        />
+      );
+    }
+    if (selectedServiceId === '03') {
+      return (
+        <AiAutomationServicePage
+          onBackClick={() => setSelectedServiceId(null)}
+          onTalkClick={onTalkClick}
+        />
+      );
+    }
+    if (selectedServiceId === '06') {
+      return (
+        <MarketingServicePage
+          onBackClick={() => setSelectedServiceId(null)}
+          onTalkClick={onTalkClick}
+        />
+      );
+    }
+    return (
+      <DefaultServicePage
+        serviceId={selectedService.number}
+        serviceTitle={selectedService.title}
+        serviceNumber={selectedService.number}
+        graphic={selectedService.graphic}
+        onBackClick={() => setSelectedServiceId(null)}
+        onTalkClick={onTalkClick}
+      />
+    );
+  }
+
   return (
     <div className="bg-black text-white min-h-screen pt-24">
       {/* 01: Hero Section */}
@@ -310,7 +359,11 @@ export const ServicesPage: React.FC<ServicesPageProps> = ({ onTalkClick }) => {
                 whileInView={{ opacity: 1, y: 0 }}
                 viewport={{ once: true }}
                 transition={{ duration: 0.6, delay: (index % 2) * 0.1 }}
-                className={`group relative p-8 md:p-14 flex flex-col justify-between hover:bg-neutral-950/40 transition-colors duration-300 min-h-[380px] overflow-hidden ${rowClass}`}
+                onClick={() => {
+                  analytics.track('Services Page Card Click', 'Navigation', srv.title);
+                  setSelectedServiceId(srv.number);
+                }}
+                className={`group relative p-8 md:p-14 flex flex-col justify-between hover:bg-neutral-950/40 transition-colors duration-300 min-h-[380px] overflow-hidden cursor-pointer ${rowClass}`}
               >
                 {/* Ambient dynamic card lines/shapes */}
                 <div className="absolute right-6 top-8 w-28 h-20 pointer-events-none">

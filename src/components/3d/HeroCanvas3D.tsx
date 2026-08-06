@@ -34,7 +34,7 @@ export const HeroCanvas3D: React.FC<HeroCanvas3DProps> = ({ className = '' }) =>
 
     // Scene Setup
     const scene = new THREE.Scene();
-    scene.fog = new THREE.FogExp2(0x000000, 0.035);
+    scene.fog = new THREE.FogExp2(0xffffff, 0.035);
 
     // Camera
     const camera = new THREE.PerspectiveCamera(
@@ -120,7 +120,7 @@ export const HeroCanvas3D: React.FC<HeroCanvas3DProps> = ({ className = '' }) =>
 
     particlesGeo.setAttribute('position', new THREE.BufferAttribute(particlePositions, 3));
     const particleMat = new THREE.PointsMaterial({
-      color: 0xffffff,
+      color: 0x555555,
       size: 0.035,
       transparent: true,
       opacity: 0.6,
